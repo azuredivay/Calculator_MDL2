@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:ignore="MissingPrefix"
     android:id="@+id/contain"
     xmlns:tools="http://schemas.android.com/tools"
@@ -33,7 +32,10 @@
         android:layout_height="0dp"
         android:layout_weight="3">
 
-<EditText android:textSize="30sp" android:id="@+id/outputwindow" android:layout_alignParentTop="true"
+        <TextView
+            android:textSize="40sp"
+            android:id="@+id/outputwindow"
+            android:layout_alignParentTop="true"
     android:layout_width="match_parent" fontPath="fonts/segoeui.ttf" android:text="0" android:textColor="#000000"
     android:layout_height="wrap_content" android:minHeight="100dp"  />
         <LinearLayout android:orientation="vertical" android:layout_alignParentBottom="true"
@@ -42,42 +44,112 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:orientation="horizontal">
-                <Button style="@style/NumPad" android:background="#e5e5e5" android:text="Sin" />
-                <Button style="@style/NumPad" android:background="#e5e5e5" android:text="Cos" />
-                <Button style="@style/NumPad" android:background="#e5e5e5" android:text="Tan" />
+
+                <Button
+                    style="@style/NumPad"
+                    android:onClick="MathsClickHandler"
+                    android:background="#e5e5e5"
+                    android:text="Sin" />
+
+                <Button
+                    style="@style/NumPad"
+                    android:onClick="MathsClickHandler"
+                    android:background="#e5e5e5"
+                    android:text="Cos" />
+
+                <Button
+                    style="@style/NumPad"
+                    android:onClick="MathsClickHandler"
+                    android:background="#e5e5e5"
+                    android:text="Tan" />
                 <Button style="@style/OperatorButton" android:textColor="#ff3232" android:text="\uE750" />
             </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content" android:orientation="horizontal">
-            <Button style="@style/NumPad" android:text="7" />
-            <Button style="@style/NumPad" android:text="8" />
-            <Button style="@style/NumPad" android:text="9" />
+
+            <Button
+                style="@style/NumPad"
+                android:onClick="MathsClickHandler"
+                android:text="7" />
+
+            <Button
+                style="@style/NumPad"
+                android:onClick="MathsClickHandler"
+                android:text="8" />
+
+            <Button
+                style="@style/NumPad"
+                android:onClick="MathsClickHandler"
+                android:text="9" />
             <Button style="@style/OperatorButton" android:text="\uE947" />
         </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:orientation="horizontal">
-                <Button style="@style/NumPad" android:text="4" />
-                <Button style="@style/NumPad" android:text="5" />
-                <Button style="@style/NumPad" android:text="6" />
+
+                <Button
+                    style="@style/NumPad"
+                    android:onClick="MathsClickHandler"
+                    android:text="4" />
+
+                <Button
+                    style="@style/NumPad"
+                    android:onClick="MathsClickHandler"
+                    android:text="5" />
+
+                <Button
+                    style="@style/NumPad"
+                    android:onClick="MathsClickHandler"
+                    android:text="6" />
                 <Button style="@style/OperatorButton" android:text="\uE949" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:orientation="horizontal">
-                <Button style="@style/NumPad" android:text="1" />
-                <Button style="@style/NumPad" android:text="2" />
-                <Button style="@style/NumPad" android:text="3" />
-                <Button style="@style/OperatorButton" android:text="\uE948" />
+
+                <Button
+                    style="@style/NumPad"
+                    android:onClick="MathsClickHandler"
+                    android:text="1" />
+
+                <Button
+                    style="@style/NumPad"
+                    android:onClick="MathsClickHandler"
+                    android:text="2" />
+
+                <Button
+                    style="@style/NumPad"
+                    android:onClick="MathsClickHandler"
+                    android:text="3" />
+
+                <Button
+                    style="@style/OperatorButton"
+                    android:tag="add"
+                    android:text="\uE948" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:orientation="horizontal">
-                <Button style="@style/OperatorButton"  android:text="\uEccc" android:textSize="12sp" />
-                <Button style="@style/NumPad" android:text="\0" />
+
+                <Button
+                    style="@style/OperatorButton"
+                    android:onClick="MathsClickHandler"
+                    android:tag="dot"
+                    android:text="\uEccc"
+                    android:textSize="12sp" />
+
+                <Button
+                    style="@style/NumPad"
+                    android:onClick="MathsClickHandler"
+                    android:text="\0" />
                 <Button style="@style/OperatorButton" android:text="\uE94a" />
-                <Button style="@style/OperatorButton" android:background="#ff3232" android:textColor="#ffffff" android:text="\uE94e" />
+
+                <Button
+                    style="@style/OperatorButton"
+                    android:background="#0C8484"
+                    android:textColor="#ffffff"
+                    android:text="\uE94e" />
             </LinearLayout>
         </LinearLayout>
     </RelativeLayout>
