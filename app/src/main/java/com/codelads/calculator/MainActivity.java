@@ -18,6 +18,8 @@ public class MainActivity extends AppCompatActivity
 {
     TextView outputWin = null;
     double StackNumber = 0;
+    String StackOperator = "";
+
     @Override protected void attachBaseContext(Context newBase)
     {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
@@ -52,31 +54,94 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    public void MathsClickHandler(View v) {
-        try {
-            String outputText = outputWin.getText().toString();
+    public void NumberHandler(View v)
+    {
+        try
+        {
             v.startAnimation(AnimationUtils.loadAnimation(this, R.anim.abc_popup_enter));
+            String outputText = outputWin.getText().toString();
             String ButtonText = ((Button) v).getText().toString();
-            switch (v.getTag().toString()) {
-                case "add":
-                    if (StackNumber == 0) StackNumber = Double.parseDouble(outputText);
-                    else StackNumber = ArithmeticHelper.Add(StackNumber, outputText);
-                    if (!outputText.endsWith("+"))
-                        outputWin.setText(String.format("%s%s", outputText, "+"));
-                    break;
-                case "subtract":
-                    break;
+            if(StackNumber==0) StackNumber = Double.parseDouble(outputText);
+            switch (v.getTag().toString())
+            {
                 case "dot":
-                    if (!outputText.contains("."))
-                        outputWin.setText(String.format("%s%s", outputText, "."));
+                    if (outputText.matches("^.+?\\d$")) //change this to contains after 2nd part of operator regex
+                        if(StackOperator.isEmpty() && !outputText.contains(".")) outputWin.setText(String.format("%s%s", outputText, "."));
+                        else if(!StackOperator.isEmpty() && !outputText.split(String.format("%s%s","\\",StackOperator),2)[1].contains(".")) outputWin.setText(String.format("%s%s", outputText, "."));
                     break;
                 case "digit":
-                    if (!outputText.equalsIgnoreCase("0"))
+                    if (!outputText.equals("0"))
                         outputWin.setText(String.format("%s%s", outputText, ButtonText));
                     else outputWin.setText(ButtonText);
                     break;  //
             }
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void OperatorHandler(View v)
+    {
+        //if a stack operator is present, process it by getting 2nd number, if not and /check no operator in OPW, put stackoperator on top
+        try
+        {
+            v.startAnimation(AnimationUtils.loadAnimation(this, R.anim.abc_popup_enter));
+            String outputText = outputWin.getText().toString();
+
+            try
+            {
+                if(!StackOperator.isEmpty())
+                {
+                    String secondNum;
+                    if(StackOperator.equals("+"))
+                    {
+                        secondNum = outputText.split("\\+",2)[1];
+                        StackNumber = ArithmeticHelper.Add(StackNumber,secondNum);
+                        StackOperator = "";
+                        outputWin.setText(String.format("%s", StackNumber));
+                    }
+                    else if(StackOperator.equals("-"))
+                    {
+                        if(outputText.startsWith("-")) secondNum = outputText.split("\\-")[2];
+                        else secondNum = outputText.split("\\-",2)[1]; //handle for negative number
+                        StackNumber = ArithmeticHelper.Subtract(StackNumber,secondNum);
+                        StackOperator = "";
+                        outputWin.setText(String.format("%s", StackNumber));
+                    }
+                }
+            }
+            catch (Exception i)
+            {
+                i.printStackTrace();
+            }
+
+            outputText = outputWin.getText().toString();
+            switch (v.getTag().toString())
+            {
+                case "add":
+                    StackOperator = "+";
+                    if(outputText.matches("^.+?\\d$"))
+                    {
+                        StackNumber = Double.parseDouble(outputText);
+                        outputWin.setText(String.format("%s%s", outputText, "+"));
+                    }
+                    else outputWin.setText(String.format("%s%s", outputText.substring(0,outputText.length()-1), "+"));
+                    break;
+                case "subtract":
+                    StackOperator = "-";
+                    if(outputText.matches("^.+?\\d$"))
+                    {
+                        StackNumber = Double.parseDouble(outputText);
+                        outputWin.setText(String.format("%s%s", outputText, "-"));
+                    }
+                    else outputWin.setText(String.format("%s%s", outputText.substring(0,outputText.length()-1), "-"));
+                    break;
+            }
+        }
+        catch (Exception e)
+        {
             e.printStackTrace();
         }
     }

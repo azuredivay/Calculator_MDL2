@@ -47,19 +47,19 @@
 
                 <Button
                     style="@style/NumPad"
-                    android:onClick="MathsClickHandler"
+                    android:onClick="NumberHandler"
                     android:background="#e5e5e5"
                     android:text="Sin" />
 
                 <Button
                     style="@style/NumPad"
-                    android:onClick="MathsClickHandler"
+                    android:onClick="NumberHandler"
                     android:background="#e5e5e5"
                     android:text="Cos" />
 
                 <Button
                     style="@style/NumPad"
-                    android:onClick="MathsClickHandler"
+                    android:onClick="NumberHandler"
                     android:background="#e5e5e5"
                     android:text="Tan" />
                 <Button style="@style/OperatorButton" android:textColor="#ff3232" android:text="\uE750" />
@@ -70,17 +70,17 @@
 
             <Button
                 style="@style/NumPad"
-                android:onClick="MathsClickHandler"
+                android:onClick="NumberHandler"
                 android:text="7" />
 
             <Button
                 style="@style/NumPad"
-                android:onClick="MathsClickHandler"
+                android:onClick="NumberHandler"
                 android:text="8" />
 
             <Button
                 style="@style/NumPad"
-                android:onClick="MathsClickHandler"
+                android:onClick="NumberHandler"
                 android:text="9" />
             <Button style="@style/OperatorButton" android:text="\uE947" />
         </LinearLayout>
@@ -90,19 +90,19 @@
 
                 <Button
                     style="@style/NumPad"
-                    android:onClick="MathsClickHandler"
+                    android:onClick="NumberHandler"
                     android:text="4" />
 
                 <Button
                     style="@style/NumPad"
-                    android:onClick="MathsClickHandler"
+                    android:onClick="NumberHandler"
                     android:text="5" />
 
                 <Button
                     style="@style/NumPad"
-                    android:onClick="MathsClickHandler"
+                    android:onClick="NumberHandler"
                     android:text="6" />
-                <Button style="@style/OperatorButton" android:text="\uE949" />
+                <Button style="@style/OperatorButton" android:tag="subtract" android:onClick="OperatorHandler" android:text="\uE949" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -110,22 +110,23 @@
 
                 <Button
                     style="@style/NumPad"
-                    android:onClick="MathsClickHandler"
+                    android:onClick="NumberHandler"
                     android:text="1" />
 
                 <Button
                     style="@style/NumPad"
-                    android:onClick="MathsClickHandler"
+                    android:onClick="NumberHandler"
                     android:text="2" />
 
                 <Button
                     style="@style/NumPad"
-                    android:onClick="MathsClickHandler"
+                    android:onClick="NumberHandler"
                     android:text="3" />
 
                 <Button
                     style="@style/OperatorButton"
                     android:tag="add"
+                    android:onClick="OperatorHandler"
                     android:text="\uE948" />
             </LinearLayout>
             <LinearLayout
@@ -134,14 +135,14 @@
 
                 <Button
                     style="@style/OperatorButton"
-                    android:onClick="MathsClickHandler"
+                    android:onClick="NumberHandler"
                     android:tag="dot"
                     android:text="\uEccc"
                     android:textSize="12sp" />
 
                 <Button
                     style="@style/NumPad"
-                    android:onClick="MathsClickHandler"
+                    android:onClick="NumberHandler"
                     android:text="\0" />
                 <Button style="@style/OperatorButton" android:text="\uE94a" />
 
