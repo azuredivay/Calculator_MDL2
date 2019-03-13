@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity
             switch (v.getTag().toString())
             {
                 case "dot":
-                    if (outputText.matches("^.+?\\d$")) //change this to contains after 2nd part of operator regex
+                    if (outputText.matches("^\\d$")) //change this to contains after 2nd part of operator regex
                         if(StackOperator.isEmpty() && !outputText.contains(".")) outputWin.setText(String.format("%s%s", outputText, "."));
                         else if(!StackOperator.isEmpty() && !outputText.split(String.format("%s%s","\\",StackOperator),2)[1].contains(".")) outputWin.setText(String.format("%s%s", outputText, "."));
                     break;
@@ -74,6 +74,12 @@ public class MainActivity extends AppCompatActivity
                         outputWin.setText(String.format("%s%s", outputText, ButtonText));
                     else outputWin.setText(ButtonText);
                     break;  //
+                case "backspace":
+                    if(outputText.length()>1)
+                        outputWin.setText(outputWin.getText().subSequence(0,outputText.length()-1));
+                    else outputWin.setText("0");
+
+                    break;
             }
         }
         catch (Exception e)
@@ -95,20 +101,58 @@ public class MainActivity extends AppCompatActivity
                 if(!StackOperator.isEmpty())
                 {
                     String secondNum;
-                    if(StackOperator.equals("+"))
+                    switch (StackOperator)
                     {
-                        secondNum = outputText.split("\\+",2)[1];
-                        StackNumber = ArithmeticHelper.Add(StackNumber,secondNum);
-                        StackOperator = "";
-                        outputWin.setText(String.format("%s", StackNumber));
-                    }
-                    else if(StackOperator.equals("-"))
-                    {
-                        if(outputText.startsWith("-")) secondNum = outputText.split("\\-")[2];
-                        else secondNum = outputText.split("\\-",2)[1]; //handle for negative number
-                        StackNumber = ArithmeticHelper.Subtract(StackNumber,secondNum);
-                        StackOperator = "";
-                        outputWin.setText(String.format("%s", StackNumber));
+                        case "+":
+                            if (outputText.startsWith("-")) secondNum = outputText.split("\\-")[2];
+                            else
+                                secondNum = outputText.split("\\+", 2)[1]; //handle for negative number
+                            StackNumber = ArithmeticHelper.Add(StackNumber, secondNum);
+                            StackOperator = "";
+                            outputWin.setText(String.format("%s", StackNumber));
+                            break;
+                        case "-":
+                            if (outputText.startsWith("-")) secondNum = outputText.split("\\-")[2];
+                            else
+                                secondNum = outputText.split("\\-", 2)[1]; //handle for negative number
+                            StackNumber = ArithmeticHelper.Subtract(StackNumber, secondNum);
+                            StackOperator = "";
+                            outputWin.setText(String.format("%s", StackNumber));
+                            break;
+                        case "*":
+                            if (outputText.startsWith("-")) secondNum = outputText.split("\\-")[2];
+                            else
+                                secondNum = outputText.split("\\*", 2)[1]; //handle for negative number
+                            StackNumber = ArithmeticHelper.Multiply(StackNumber, secondNum);
+                            StackOperator = "";
+                            outputWin.setText(String.format("%s", StackNumber));
+                            break;
+                        case "/":
+                            if (outputText.startsWith("-")) secondNum = outputText.split("\\-")[2];
+                            else
+                                secondNum = outputText.split("\\/", 2)[1]; //handle for negative number
+                            StackNumber = ArithmeticHelper.Divide(StackNumber, secondNum);
+                            StackOperator = "";
+                            outputWin.setText(String.format("%s", StackNumber));
+                            break;
+                        case "SIN":
+                            if (outputText.startsWith("-")) secondNum = outputText.split("\\-")[2];
+                            StackNumber = ArithmeticHelper.SIN(StackNumber);
+                            StackOperator = "";
+                            outputWin.setText(String.format("%s", StackNumber));
+                            break;
+                        case "COS":
+                            if (outputText.startsWith("-")) secondNum = outputText.split("\\-")[2];
+                            StackNumber = ArithmeticHelper.COS(StackNumber);
+                            StackOperator = "";
+                            outputWin.setText(String.format("%s", StackNumber));
+                            break;
+                        case "TAN":
+                            if (outputText.startsWith("-")) secondNum = outputText.split("\\-")[2];
+                            StackNumber = ArithmeticHelper.TAN(StackNumber);
+                            StackOperator = "";
+                            outputWin.setText(String.format("%s", StackNumber));
+                            break;
                     }
                 }
             }
@@ -122,7 +166,7 @@ public class MainActivity extends AppCompatActivity
             {
                 case "add":
                     StackOperator = "+";
-                    if(outputText.matches("^.+?\\d$"))
+                    if(outputText.matches("\\d*\\.?\\d*"))
                     {
                         StackNumber = Double.parseDouble(outputText);
                         outputWin.setText(String.format("%s%s", outputText, "+"));
@@ -131,12 +175,61 @@ public class MainActivity extends AppCompatActivity
                     break;
                 case "subtract":
                     StackOperator = "-";
-                    if(outputText.matches("^.+?\\d$"))
+                    if(outputText.matches("\\d*\\.?\\d*"))
                     {
                         StackNumber = Double.parseDouble(outputText);
                         outputWin.setText(String.format("%s%s", outputText, "-"));
                     }
                     else outputWin.setText(String.format("%s%s", outputText.substring(0,outputText.length()-1), "-"));
+                    break;
+                case "divide":
+                    StackOperator = "/";
+                    if(outputText.matches("\\d*\\.?\\d*"))
+                    {
+                        StackNumber = Double.parseDouble(outputText);
+                        outputWin.setText(String.format("%s%s", outputText, "/"));
+                    }
+                    else outputWin.setText(String.format("%s%s", outputText.substring(0,outputText.length()-1), "/"));
+                    break;
+                case "multiply":
+                    StackOperator = "*";
+                    if(outputText.matches("\\d*\\.?\\d*"))
+                    {
+                        StackNumber = Double.parseDouble(outputText);
+                        outputWin.setText(String.format("%s%s", outputText, "*"));
+                    }
+                    else outputWin.setText(String.format("%s%s", outputText.substring(0,outputText.length()-1), "*"));
+                    break;
+                case "SIN":
+                    StackOperator = "SIN";
+                    if(outputText.matches("\\d*\\.?\\d*"))
+                    {
+                        StackNumber = Double.parseDouble(outputText);
+                        outputWin.setText(String.format("SIN(%s)", outputText));
+                    }
+                    //else outputWin.setText(String.format("%s%s", outputText.substring(0,outputText.length()-1), "*"));
+                    break;
+                case "COS":
+                    StackOperator = "COS";
+                    if(outputText.matches("\\d*\\.?\\d*"))
+                    {
+                        StackNumber = Double.parseDouble(outputText);
+                        outputWin.setText(String.format("COS(%s)", outputText));
+                    }
+                    //else outputWin.setText(String.format("%s%s", outputText.substring(0,outputText.length()-1), "*"));
+                    break;
+                case "TAN":
+                    StackOperator = "TAN";
+                    if(outputText.matches("\\d*\\.?\\d*"))
+                    {
+                        StackNumber = Double.parseDouble(outputText);
+                        outputWin.setText(String.format("TAN(%s)", outputText));
+                    }
+                    //else outputWin.setText(String.format("TAN(%s)", outputText.substring(0,outputText.length()-1), "*"));
+                    break;
+                case "equals":
+                    if(outputText.matches("\\d*\\.?\\d*"))
+                        StackOperator = "";
                     break;
             }
         }

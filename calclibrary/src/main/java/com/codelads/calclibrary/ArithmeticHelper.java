@@ -37,10 +37,42 @@ public class ArithmeticHelper {
         return null;
     }
 
-    public static Double Multiply(String A, String B)
+    public static Double Divide(double A, String B)
+    {
+        if (!B.equalsIgnoreCase("0"))
+        {
+            double tempB = Double.parseDouble(B);
+            return A / tempB;
+        }
+        return null;
+    }
+
+    public static double Multiply(String A, String B)
     {
         Double tempA = Double.parseDouble(A);
         Double tempB = Double.parseDouble(B);
         return tempA * tempB;
     }
+
+    public static double Multiply(double A, String B)
+    {
+        double tempB = Double.parseDouble(B);
+        return A * tempB;
+    }
+
+    public static double SIN(double A)
+    {
+        return Math.sin(A);
+    }
+
+    public static double COS(double A)
+    {
+        return Math.cos(A);
+    }
+
+    public static double TAN(double A)
+    {
+        return Math.tan(A);
+    }
+
 }
